@@ -1,0 +1,45 @@
+# Disable directory browsing
+
+Options -Indexes
+
+# Default entry point
+
+DirectoryIndex index.php
+
+# Protect hidden and sensitive files
+
+<FilesMatch "(^\.|\.log$|\.ini$|\.sql$|\.bak$|^README\.md$)">
+    Require all denied
+</FilesMatch>
+
+# Enable compression when available
+
+<IfModule mod_deflate.c>
+
+    AddOutputFilterByType DEFLATE
+        text/html
+        text/plain
+        text/css
+        text/javascript
+        application/javascript
+        application/json
+        image/svg+xml
+
+</IfModule>
+
+# Enable browser caching
+
+<IfModule mod_expires.c>
+
+    ExpiresActive On
+
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/webp "access plus 30 days"
+    ExpiresByType image/svg+xml "access plus 30 days"
+
+    ExpiresByType text/css "access plus 1 day"
+    ExpiresByType application/javascript "access plus 1 day"
+    ExpiresByType text/javascript "access plus 1 day"
+
+</IfModule>

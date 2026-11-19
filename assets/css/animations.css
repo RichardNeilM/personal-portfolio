@@ -1,0 +1,223 @@
+/* ========================================
+   ANIMATION TOKENS
+======================================== */
+
+:root {
+    --animation-fast: 200ms;
+    --animation-normal: 350ms;
+    --animation-slow: 650ms;
+
+    --animation-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ========================================
+   SCROLL REVEAL
+======================================== */
+
+.reveal-ready {
+    opacity: 0;
+    transform: translateY(18px);
+
+    transition:
+        opacity var(--animation-slow) var(--animation-easing),
+        transform var(--animation-slow) var(--animation-easing);
+
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-ready.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   CARD INTERACTIONS
+======================================== */
+
+.card {
+    transition:
+        background var(--animation-normal),
+        border-color var(--animation-normal),
+        box-shadow var(--animation-normal);
+}
+
+@media (hover: hover) {
+
+    .card:hover {
+        border-color: var(--text-secondary);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    .project-item:hover {
+        transform: translateY(-3px);
+    }
+
+    .skill-tag:hover {
+        transform: translateY(-3px);
+    }
+
+    .learning-item:hover .learning-icon {
+        transform: translateY(-2px);
+        border-color: var(--text-secondary);
+    }
+
+}
+
+.project-item,
+.skill-tag,
+.learning-icon,
+.contact-item {
+    transition:
+        transform var(--animation-fast),
+        background var(--animation-normal),
+        border-color var(--animation-normal);
+}
+
+/* ========================================
+   BUTTON INTERACTIONS
+======================================== */
+
+.btn:active,
+.theme-toggle:active {
+    transform: scale(0.96);
+}
+
+.theme-toggle:hover {
+    border-color: var(--text-secondary);
+}
+
+/* ========================================
+   SMOOTH THEME TRANSITION
+======================================== */
+
+body,
+.profile-image,
+.card,
+.btn,
+.theme-toggle,
+.skill-tag,
+.project-item,
+.technology-tag,
+.learning-icon,
+.project-icon,
+.contact-item {
+    transition-property:
+        background-color,
+        color,
+        border-color,
+        box-shadow,
+        transform;
+
+    transition-duration: var(--animation-normal);
+    transition-timing-function: ease;
+}
+
+/* ========================================
+   SCROLL PROGRESS
+======================================== */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+
+    background: var(--text-primary);
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* ========================================
+   BACK TO TOP
+======================================== */
+
+.back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--surface);
+    color: var(--text-primary);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+
+    transition: all var(--animation-normal);
+
+    z-index: 999;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    border-color: var(--text-secondary);
+}
+
+.back-to-top svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal-ready {
+        opacity: 1;
+        transform: none;
+    }
+
+}
+
+/* Maintain scroll reveal transitions */
+
+.reveal-ready {
+    transition:
+        opacity var(--animation-slow) var(--animation-easing),
+        transform var(--animation-slow) var(--animation-easing),
+        background-color var(--animation-normal),
+        border-color var(--animation-normal),
+        box-shadow var(--animation-normal);
+
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-ready.is-visible {
+    transition-delay: 0ms;
+}
